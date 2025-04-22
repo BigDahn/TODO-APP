@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+
+@import "tailwindcss";
+
+
+
+@theme{
+  --font-Josefin:"Josefin Sans",san-serif;
+  
+}
