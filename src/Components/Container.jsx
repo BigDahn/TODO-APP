@@ -4,8 +4,8 @@ import Input from "./Input";
 
 function Container() {
   return (
-    <section>
-      <div className="flex flex-col items-center">
+    <section className=" ">
+      <div className="flex flex-col gap-7 ">
         <Heading />
         <div>
           <Input />
