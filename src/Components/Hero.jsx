@@ -12,7 +12,7 @@ function Hero() {
           : " bg-[url(/images/bg-mobile-light.jpg)] md:bg-[url(/images/bg-desktop-light.jpg)] max-w-[100%]    bg-cover bg-no-repeat "
       }`}
     >
-      <div className=" max-w-[80%] lg:max-w-[30%] py-[6rem] m-auto">
+      <div className=" max-w-[80%] lg:max-w-[30%] py-[0.4em] md:py-[6rem] m-auto">
         <Container />
       </div>
     </div>

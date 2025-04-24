@@ -17,6 +17,34 @@ function reducer(state, action) {
         isDarkMode: !state.isDarkMode,
       };
     }
+    case "NewData": {
+      const updatedData = [...state.data, action.payload];
+
+      return {
+        ...state,
+        data: updatedData,
+      };
+    }
+    case "checked": {
+      return {
+        ...state,
+        data: state.data.map((s) => {
+          if (s.id === action.payload) {
+            return {
+              ...s,
+              isCompleted: !s.isCompleted,
+            };
+          }
+          return s;
+        }),
+      };
+    }
+    case "clear": {
+      return {
+        ...state,
+        data: state.data.filter((s) => !s.isCompleted),
+      };
+    }
   }
 }
 
