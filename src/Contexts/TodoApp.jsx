@@ -3,10 +3,12 @@ import data from "../data";
 
 const TodoContext = createContext();
 
+const listFilter = ["All", "Active", "Completed"];
+
 const initialState = {
   data: data,
   isDarkMode: true,
-  activeList: "",
+  options: listFilter.at(0),
 };
 
 function reducer(state, action) {
@@ -39,6 +41,30 @@ function reducer(state, action) {
         }),
       };
     }
+    case "filter": {
+      const result = action.payload;
+      let norms;
+      if (result === "All") {
+        norms = data;
+      } else if (result === "Active") {
+        norms = data.filter((s) => !s.isCompleted);
+      } else {
+        norms = data.filter((s) => s.isCompleted);
+      }
+
+      console.log(norms);
+      return {
+        ...state,
+        options: listFilter.filter((s) => s === action.payload)[0],
+        data: norms,
+      };
+    }
+    case "delete": {
+      return {
+        ...state,
+        data: state.data.filter((s) => s.id != action.payload),
+      };
+    }
     case "clear": {
       return {
         ...state,
@@ -49,13 +75,15 @@ function reducer(state, action) {
 }
 
 function TodoApp({ children }) {
-  const [{ data, isDarkMode, activeList }, dispatch] = useReducer(
+  const [{ data, isDarkMode, activeList, options }, dispatch] = useReducer(
     reducer,
     initialState
   );
 
   return (
-    <TodoContext.Provider value={{ data, isDarkMode, activeList, dispatch }}>
+    <TodoContext.Provider
+      value={{ data, isDarkMode, activeList, options, listFilter, dispatch }}
+    >
       {children}
     </TodoContext.Provider>
   );

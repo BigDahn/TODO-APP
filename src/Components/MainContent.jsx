@@ -2,9 +2,11 @@ import React from "react";
 import { useTodo } from "../Contexts/TodoApp";
 
 function MainContent() {
-  const { isDarkMode, data, dispatch } = useTodo();
+  const { isDarkMode, data, options, listFilter, dispatch } = useTodo();
   const ItemsLeft = data.filter((s) => !s.isCompleted).length;
 
+  console.log(options);
+  //console.log(listFilter);
   return (
     <section>
       <div
@@ -47,7 +49,9 @@ function MainContent() {
                     {todo}
                   </p>
                 </div>
-                <button className=" ">
+                <button className=" " onClick={() => {
+                  dispatch({type:"delete",payload:id})
+                }}>
                   <img src="/images/icon-cross.svg" className="h-3" />
                 </button>
               </section>
@@ -56,9 +60,23 @@ function MainContent() {
           <div className="flex items-center justify-between px-3 py-2 text-center text-[13px]">
             <h4>{ItemsLeft} items left</h4>
             <div className="hidden md:flex items-center gap-2 text-center text-[13px]">
-              <button className=" cursor-pointer">All</button>
-              <button className=" cursor-pointer">Active</button>
-              <button className=" cursor-pointer">Completed</button>
+              {listFilter.map((s, index) => {
+                return (
+                  <button
+                    className={`${
+                      options === s
+                        ? "cursor-pointer text-[#4d7ada]"
+                        : "cursor-pointer"
+                    }`}
+                    key={index}
+                    onClick={() => {
+                      dispatch({ type: "filter", payload: s });
+                    }}
+                  >
+                    {s}
+                  </button>
+                );
+              })}
             </div>
             <button
               className=" cursor-pointer"
@@ -71,9 +89,23 @@ function MainContent() {
       </div>
       <div className="bg-[#25273c] font-Josefin text-white m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden">
         <div className="flex items-center justify-center gap-6 py-3  ">
-          <button className=" cursor-pointer">All</button>
-          <button className=" cursor-pointer">Active</button>
-          <button className=" cursor-pointer">Completed</button>
+          {listFilter.map((s, index) => {
+            return (
+              <button
+                className={`${
+                  options === s
+                    ? "cursor-pointer text-[#4d7ada]"
+                    : "cursor-pointer"
+                }`}
+                key={index}
+                onClick={() => {
+                  dispatch({ type: "filter", payload: s });
+                }}
+              >
+                {s}
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>
