@@ -3,7 +3,7 @@ import Hero from "./Components/Hero";
 
 function App() {
   return (
-    <div className="grid grid-rows-[30vh_500px] md:grid-rows-[40vh_60vh] overflow-y-hidden ">
+    <div className="grid grid-rows-[30vh_100vh] md:grid-rows-[40vh_60vh] overflow-y-hidden">
       <Hero />
       <Footer />
     </div>

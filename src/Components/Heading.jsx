@@ -4,7 +4,7 @@ import { useTodo } from "../Contexts/TodoApp";
 function Heading() {
   const { isDarkMode, dispatch } = useTodo();
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between py-[0.5px]">
       <h1 className="text-white font-bold font-Josefin text-3xl">TODO</h1>
       <button
         onClick={() => {

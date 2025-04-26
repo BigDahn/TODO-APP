@@ -76,6 +76,13 @@ function reducer(state, action) {
         originalData: state.originalData.filter((s) => !s.isCompleted),
       };
     }
+    case "dnd": {
+      return {
+        ...state,
+        data: action.payload,
+        originalData: action.payload,
+      };
+    }
   }
 }
 

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useTodo } from "../Contexts/TodoApp";
 
 function Input() {
-  const { isDarkMode, dispatch } = useTodo();
+  const { isDarkMode, dispatch, data } = useTodo();
   const [newTodo, setNewTodo] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!newTodo) return;
     const newData = {
-      id: 9,
+      id: data.length + 1,
       isCompleted: false,
       todo: newTodo,
     };
