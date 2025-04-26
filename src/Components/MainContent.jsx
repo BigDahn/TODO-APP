@@ -38,7 +38,7 @@ function MainContent() {
                       isCompleted && isDarkMode
                         ? "rounded-full w-[23px] h-[23px] bg-[linear-gradient(to_right_bottom,#79aafa,#734ed1)] outline-none  border-1 border-[#2c2e43] flex items-center justify-center cursor-pointer "
                         : isCompleted && !isDarkMode
-                        ? "rounded-full w-[23px] h-[23px] bg-[#79aafa] outline-none border-1  border-gray-100   flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
+                        ? "rounded-full w-[23px] h-[23px] bg-[linear-gradient(to_right_bottom,#79aafa,#734ed1)] outline-none border-1  border-gray-100   flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
                         : !isCompleted && isDarkMode
                         ? "rounded-full w-[23px] h-[23px]  border-[1px] outline-none  border-[#2c2e43]  flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92]"
                         : "rounded-full w-[23px] h-[23px]  border-[1px] outline-none  border-gray-200 flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
