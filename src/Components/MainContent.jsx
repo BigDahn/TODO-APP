@@ -36,7 +36,7 @@ function MainContent() {
                   <button
                     className={`${
                       isCompleted && isDarkMode
-                        ? "rounded-full w-[23px] h-[23px] bg-[#79aafa] outline-none  border-1 border-[#2c2e43] flex items-center justify-center cursor-pointer "
+                        ? "rounded-full w-[23px] h-[23px] bg-[linear-gradient(to_right_bottom,#79aafa,#734ed1)] outline-none  border-1 border-[#2c2e43] flex items-center justify-center cursor-pointer "
                         : isCompleted && !isDarkMode
                         ? "rounded-full w-[23px] h-[23px] bg-[#79aafa] outline-none border-1  border-gray-100   flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
                         : !isCompleted && isDarkMode
@@ -78,7 +78,7 @@ function MainContent() {
           })}
           <div className="flex items-center justify-between px-3 py-2 text-center text-[13px]">
             <h4>{ItemsLeft} items left</h4>
-            <div className="hidden md:flex items-center gap-2 text-center text-[13px]">
+            <div className="hidden md:flex font-bold items-center gap-2 text-center text-[13px]">
               {listFilter.map((s, index) => {
                 return (
                   <button
@@ -109,8 +109,8 @@ function MainContent() {
       <div
         className={`${
           isDarkMode
-            ? "bg-[#25273c] font-Josefin text-white m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden"
-            : "bg-[#fff] font-Josefin text-[#5f606e] m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden shadow-2xl"
+            ? "bg-[#25273c] font-Josefin font-bold text-white m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden"
+            : "bg-[#fff] font-Josefin text-[#5f606e] font-bold m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden shadow-2xl"
         }`}
       >
         <div className="flex items-center justify-center gap-6 py-3  ">
