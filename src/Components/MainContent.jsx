@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTodo } from "../Contexts/TodoApp";
 
 function MainContent() {
   const { isDarkMode, data, options, listFilter, dispatch } = useTodo();
   const ItemsLeft = data.filter((s) => !s.isCompleted).length;
 
-  console.log(options);
-  //console.log(listFilter);
+  const [Id, setID] = useState();
+
   return (
     <section>
       <div
@@ -16,20 +16,32 @@ function MainContent() {
             : "bg-[#fff]  m-auto max-w-[80%] lg:max-w-[30%] relative bottom-[2em] rounded-sm shadow-2xl md:bottom-10 "
         }`}
       >
-        <section className="flex flex-col justify-center  gap-2 divide-y divide-[#2c2e43]  font-Josefin text-white">
+        <section
+          className={`${
+            isDarkMode
+              ? "flex flex-col justify-center  gap-2 divide-y divide-[#2c2e43]  font-Josefin text-white"
+              : "flex flex-col justify-center  gap-2 divide-y divide-gray-200  font-Josefin text-[#5f606e]"
+          }`}
+        >
           {data.map((s) => {
             const { todo, id, isCompleted } = s;
             return (
               <section
                 key={id}
-                className="flex items-center justify-between  font-Josefin text-white px-3 py-[10px]"
+                className="flex items-center justify-between  font-Josefin px-3 py-[10px] cursor-pointer"
+                onMouseEnter={() => setID(id)}
+                onMouseLeave={() => setID()}
               >
                 <div className="flex items-center gap-3 cursor-pointer    ">
                   <button
                     className={`${
-                      isCompleted
-                        ? "rounded-full w-[23px] h-[23px] bg-[#79aafa]  flex items-center justify-center cursor-pointer "
-                        : "rounded-full w-[23px] h-[23px]  border-[1px] border-[#2c2e43] flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
+                      isCompleted && isDarkMode
+                        ? "rounded-full w-[23px] h-[23px] bg-[#79aafa] outline-none  border-1 border-[#2c2e43] flex items-center justify-center cursor-pointer "
+                        : isCompleted && !isDarkMode
+                        ? "rounded-full w-[23px] h-[23px] bg-[#79aafa] outline-none border-1  border-gray-100   flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
+                        : !isCompleted && isDarkMode
+                        ? "rounded-full w-[23px] h-[23px]  border-[1px] outline-none  border-[#2c2e43]  flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92]"
+                        : "rounded-full w-[23px] h-[23px]  border-[1px] outline-none  border-gray-200 flex items-center justify-center cursor-pointer hover:border-y-[#7b96b9] hover:border-x-[#695d92] "
                     }`}
                     onClick={() => {
                       dispatch({ type: "checked", payload: id });
@@ -41,19 +53,26 @@ function MainContent() {
                   </button>
                   <p
                     className={`${
-                      isCompleted
-                        ? "line-through text-[13px] md:text-[17px] "
+                      isCompleted && isDarkMode
+                        ? "line-through text-[13px] md:text-[17px] text-[#44465b] "
+                        : isCompleted && !isDarkMode
+                        ? "text-[13px] md:text-[17px] line-through text-[#c1c2c7]"
                         : "text-[13px] md:text-[17px]"
                     }`}
                   >
                     {todo}
                   </p>
                 </div>
-                <button className=" " onClick={() => {
-                  dispatch({type:"delete",payload:id})
-                }}>
-                  <img src="/images/icon-cross.svg" className="h-3" />
-                </button>
+                {Id === id && (
+                  <button
+                    className=" cursor-pointer"
+                    onClick={() => {
+                      dispatch({ type: "delete", payload: id });
+                    }}
+                  >
+                    <img src="/images/icon-cross.svg" className="h-3" />
+                  </button>
+                )}
               </section>
             );
           })}
@@ -87,7 +106,13 @@ function MainContent() {
           </div>
         </section>
       </div>
-      <div className="bg-[#25273c] font-Josefin text-white m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden">
+      <div
+        className={`${
+          isDarkMode
+            ? "bg-[#25273c] font-Josefin text-white m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden"
+            : "bg-[#fff] font-Josefin text-[#5f606e] m-auto max-w-[80%] lg:max-w-[30%]  rounded-md md:hidden shadow-2xl"
+        }`}
+      >
         <div className="flex items-center justify-center gap-6 py-3  ">
           {listFilter.map((s, index) => {
             return (
@@ -113,3 +138,4 @@ function MainContent() {
 }
 
 export default MainContent;
+//

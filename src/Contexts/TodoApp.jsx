@@ -9,6 +9,7 @@ const initialState = {
   data: data,
   isDarkMode: true,
   options: listFilter.at(0),
+  originalData: data,
 };
 
 function reducer(state, action) {
@@ -20,11 +21,10 @@ function reducer(state, action) {
       };
     }
     case "NewData": {
-      const updatedData = [...state.data, action.payload];
-
       return {
         ...state,
-        data: updatedData,
+        data: [...state.data, action.payload],
+        originalData: [...state.originalData, action.payload],
       };
     }
     case "checked": {
@@ -39,36 +39,41 @@ function reducer(state, action) {
           }
           return s;
         }),
+        originalData: state.originalData.map((s) => {
+          if (s.id === action.payload) {
+            return {
+              ...s,
+              isCompleted: !s.isCompleted,
+            };
+          }
+          return s;
+        }),
       };
     }
     case "filter": {
-      const result = action.payload;
-      let norms;
-      if (result === "All") {
-        norms = data;
-      } else if (result === "Active") {
-        norms = data.filter((s) => !s.isCompleted);
-      } else {
-        norms = data.filter((s) => s.isCompleted);
-      }
-
-      console.log(norms);
       return {
         ...state,
         options: listFilter.filter((s) => s === action.payload)[0],
-        data: norms,
+        data:
+          action.payload === "All"
+            ? state.originalData
+            : action.payload === "Active"
+            ? state.originalData.filter((s) => !s.isCompleted)
+            : state.originalData.filter((s) => s.isCompleted),
       };
     }
     case "delete": {
       return {
         ...state,
         data: state.data.filter((s) => s.id != action.payload),
+        originalData: state.originalData.filter((s) => s.id != action.payload),
       };
     }
     case "clear": {
       return {
         ...state,
         data: state.data.filter((s) => !s.isCompleted),
+        originalData: state.originalData.filter((s) => !s.isCompleted),
       };
     }
   }
